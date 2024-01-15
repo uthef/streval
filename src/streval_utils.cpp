@@ -1,6 +1,7 @@
 #include <string>
 #include "parsing_result.h"
 #include "oper.h"
+#include <stdexcept>
 
 namespace uthef {
     struct operation {
@@ -91,6 +92,11 @@ namespace uthef {
 
         if ((dot && !num) || (e && !num_after_e) || last_c == ',') return {INVALID_NUMBER_FORMAT, start};
 
-        return std::stod(str);
+        try {
+            return std::stod(str);
+        }
+        catch (std::out_of_range& e) {
+            return { INVALID_NUMBER_FORMAT, start };
+        }
     }
 }

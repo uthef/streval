@@ -24,7 +24,8 @@ int main() {
             { "", 0 },
             { "945.123", 945.123 },
             { "3* (100 - 9)", 273 },
-            { "(12 + (17 - 19))", 10 }
+            { "(12 + (17 - 19))", 10 },
+            { "-(10 + 1)", -11 }
     };
 
     testcase error_cases[] = {
@@ -37,7 +38,8 @@ int main() {
             { ")(55 * 6.5)", { UNEXPECTED_PARENTHESIS, 0 } },
             { "d()", { UNKNOWN_FUNC, 0 } },
             { "14 / const", { UNKNOWN_CONST, 5} },
-            { "123 + 123PI", { OP_EXPECTED, 9 } }
+            { "123 + 123PI", { OP_EXPECTED, 9 } },
+            { "5e+91433434", { INVALID_NUMBER_FORMAT, 0} }
     };
 
     scope.put('^', [](double a, double b) { return pow(a, b); }, 2);
